@@ -1,0 +1,37 @@
+<div class="flex flex-col md:grid grid-cols-6 mx-auto p-2 text-blue-50">
+    <div class="flex flex-row-reverse md:contents">
+
+        <div class=" col-start-3 col-end-3 md:mx-auto relative mr-10 z-50">
+
+            <button (click)="addExperienceInfo()"
+            [disabled]="readonly"
+                class="  absolute w-max -top-6 -left-[20px] outline text-sky-300 px-2 rounded hover:bg-slate-100">Add
+                Experience</button>
+        </div>
+    </div>
+    <div class="flex flex-row-reverse md:contents">
+        <ng-container *ngFor="let xb of experienceInfo; index as i">
+            <div class="col-start-3 col-end-3 md:mx-auto relative mr-10">
+                <div class="h-full w-6 flex items-center justify-center">
+                    <div class="h-full w-[2px] bg-black pointer-events-none"></div>
+                </div>
+                <div class="w-2 h-2 absolute top-1/2 left-[35%] -mt-1 rounded-full bg-blue-500 shadow"></div>
+            </div>
+            <div class="col-start-4 col-end-6 text-black border-black border rounded mt-1 px-2 flex justify-between items-center">
+                <div>
+                    <div class="flex ">
+                        {{xb.name}} {{xb.startDate.getFullYear()}} - {{xb.endDate.getFullYear()}}
+                    </div>
+                    <div class="text-gray-400">
+                        {{xb.roles}}
+                    </div>
+                </div>
+                <button (click)="removeIndex(i)" [disabled]="readonly"
+                    class="rounded-full border-white hover:opacity-45 border w-[20px] h-[20px] flex items-center justify-center">
+                    <i class="fa fa-times"></i>
+                </button>
+
+            </div>
+        </ng-container>
+    </div>
+</div>

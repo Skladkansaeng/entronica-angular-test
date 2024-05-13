@@ -1,0 +1,48 @@
+<div class="container mx-auto pt-8">
+    <div>
+        <button (click)="gotoCreateInfo()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Add User Info
+        </button>
+    </div>
+    <div class="flex flex-col">
+        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="inline-block min-w-full py-2 sm:px-6 lg:px-8">
+                <div class="overflow-hidden">
+                    <table class="min-w-full text-left text-sm font-light text-surface text-black">
+                        <thead class="border-b border-gray-400 font-medium ">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">id</th>
+                                <th scope="col" class="px-6 py-4">username</th>
+                                <th scope="col" class="px-6 py-4">firstName</th>
+                                <th scope="col" class="px-6 py-4">nickname</th>
+                                <th scope="col" class="px-6 py-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <ng-container *ngFor="let xb of userInfos; index as i">
+                                <tr class="border-b border-gray-400 ">
+                                    <td class="whitespace-nowrap px-6 py-4 font-medium">{{xb.id}}</td>
+                                    <td class="whitespace-nowrap px-6 py-4">{{xb.username}}</td>
+                                    <td class="whitespace-nowrap px-6 py-4">{{xb.firstName}}</td>
+                                    <td class="whitespace-nowrap px-6 py-4">{{xb.nickname}}</td>
+                                    <td class="whitespace-nowrap px-6 py-4 gap-2 flex">
+                                        <button (click)="gotoViewInfo(xb.id)"
+                                            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                                            View
+                                        </button>
+                                        <button (click)="deleteUserInfo(xb.id)"
+                                            class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                            Delete
+                                        </button>
+                                    </td>
+                                </tr>
+                            </ng-container>
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

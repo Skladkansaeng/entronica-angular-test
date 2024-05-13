@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+input {
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid grey;
+    height: 24px;
+    padding: 8px;
+}
+
+select {
+    width: 200px;
+    border-radius: 4px;
+    border: 1px solid grey;
+    height: 24px;
+    padding-left: 8px;
+}
+
+label {
+    font-size: 12px;
+    font-weight: bold;
+    color: grey
+}
+
+select:invalid { color: gray; }

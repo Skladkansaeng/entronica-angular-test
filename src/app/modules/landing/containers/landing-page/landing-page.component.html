@@ -1,0 +1,183 @@
+<form [formGroup]="myForm">
+  <div class="bg-gray-200 p-4 grid grid-cols-1 gap-10">
+    <div class="flex flex-col bg-white p-4 rounded-lg">
+      <label class="text-base font-bold">USER INFORMATION</label>
+      <div class="grid grid-cols-2 gap-x-16 gap-y-4">
+        <div class="flex flex-col">
+          <label>USERNAME</label>
+          <input class="border disabled:bg-blue-gray-50" formControlName="username" [readonly]="disabledAll" />
+        </div>
+
+        <div class="flex flex-col">
+          <label>NICK NAME</label>
+          <input class="border" formControlName="nickname" [readonly]="disabledAll" />
+        </div>
+
+        <div class="flex flex-col">
+          <label>FIRST NAME</label>
+          <input class="border" formControlName="firstName" [readonly]="disabledAll" />
+        </div>
+
+        <div class="flex flex-col">
+          <label>LAST NAME</label>
+          <input class="border" formControlName="lastName" [readonly]="disabledAll" />
+        </div>
+
+        <div class="flex flex-col">
+          <label>POSITION</label>
+          <select class="border" name="cars" id="cars" formControlName="position" [disabled]="disabledAll">
+            <option value="" disabled selected>Please select</option>
+            <option value="develop" [disabled]="disabledAll">Developer</option>
+            <option value="manager" [disabled]="disabledAll">Manager</option>
+            <option value="projectmanager" [disabled]="disabledAll">Project Manager</option>
+          </select>
+        </div>
+
+        <div class="flex flex-col">
+          <label>NATIONALITY</label>
+          <input class="border" formControlName="nationality" [readonly]="disabledAll" />
+        </div>
+
+        <div class="flex flex-col">
+          <label>TELEPHONE NUMBER</label>
+          <input class="border" formControlName="telephoneNumber" [readonly]="disabledAll" />
+        </div>
+
+        <div class="flex flex-col">
+          <label for="start">Start date:</label>
+          <input class="border" type="date" id="startingDate" name="startingDate" formControlName="startingDate"
+            [readonly]="disabledAll" />
+        </div>
+      </div>
+    </div>
+    <form [formGroup]="contractInfo">
+      <div class="flex flex-col bg-white p-4 rounded-lg">
+        <label class="text-base font-bold">CONTACT INFORMATION</label>
+        <div class="pr-40 pl-40 grid gap-4">
+          <div class="flex flex-col">
+            <label>ADDRESS</label>
+            <input class="border w-full" formControlName="address" [readonly]="disabledAll" />
+          </div>
+
+          <div class="grid grid-cols-4 gap-1">
+            <div class="flex flex-col w-full">
+              <label>Province</label>
+              <select (change)="onContractChange()" class="border w-full" name="province" id="province"
+                formControlName="province" required>
+                <option value="" disabled selected>Please select</option>
+                <option *ngFor="let province of provinces" [disabled]="disabledAll" [value]="province.id">
+                  {{province.name_th}}
+                </option>
+              </select>
+            </div>
+            <div class="flex flex-col w-full">
+              <label>District</label>
+              <select (change)="onContractChange()" class="border w-full" name="district" id="district"
+                formControlName="district" required>
+                <option value="" disabled selected>Please select</option>
+                <option *ngFor="let district of districts" [disabled]="disabledAll" [value]="district.id">
+                  {{district.name_th}}
+                </option>
+              </select>
+            </div>
+            <div class="flex flex-col">
+              <label>SUB DISTRICT</label>
+              <select (change)="onContractChange()" class="border w-full" name="subDistrict" id="subDistrict"
+                formControlName="subDistrict" required>
+                <option value="" disabled selected>Please select</option>
+                <option *ngFor="let subDistrict of subDistricts" [disabled]="disabledAll" [value]="subDistrict.id">
+                  {{subDistrict.name_th}}
+                </option>
+              </select>
+            </div>
+
+
+            <div class="flex flex-col w-full">
+              <label>POSTAL CODE</label>
+              <input class="border" formControlName="postalCode" [readonly]="disabledAll" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2">
+            <div class="flex flex-col">
+              <label>FACEBOOK</label>
+              <input class="border w-full" formControlName="facebook" [readonly]="disabledAll" />
+            </div>
+            <div class="flex flex-col">
+              <label>LINE ID</label>
+              <input class="border w-full" formControlName="lineId" [readonly]="disabledAll" />
+            </div>
+            <div class="flex flex-col">
+              <label>INSTAGRAM</label>
+              <input class="border w-full" formControlName="instagram" [readonly]="disabledAll" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </form>
+
+    <div class="flex flex-col bg-white p-4 rounded-lg">
+      <label class="text-base font-bold">EDUCATIONAL INFORMATION</label>
+      <app-timeline [(educationInfo)]="educationInfo" [readonly]="disabledAll"></app-timeline>
+    </div>
+    <div class="flex flex-col bg-white p-4 rounded-lg">
+      <label class="text-base font-bold">EXPERIENCE INFORMATION</label>
+      <app-timeline-left [(experienceInfo)]="experienceInfo" [readonly]="disabledAll"></app-timeline-left>
+    </div>
+    <div class="flex flex-col bg-white p-4 rounded-lg">
+      <label class="text-base font-bold">SKILL INFORMATION</label>
+      <app-progress-bar-info [(skillInfo)]="skillInfo" [readonly]="disabledAll"></app-progress-bar-info>
+    </div>
+    <div class="flex flex-col bg-white p-4 rounded-lg">
+      <label class="text-base font-bold">INTERESTS INFORMATION</label>
+      <div class="flex flex-col gap-3">
+        <div class="mt-2">
+          <button (click)="addInterestsInfo()" [disabled]="disabledAll"
+            class="outline text-sky-300 px-2 rounded-full hover:bg-slate-100">Add
+            Interests</button>
+        </div>
+        <div class="flex gap-2">
+          <ng-container *ngFor="let xb of interestsInfo; index as i">
+            <div class="rounded-full px-4 py-2 bg-emerald-300 text-black flex flex-row gap-2">
+              {{xb}}
+              <button [disabled]="disabledAll" (click)="removeInterestsInfo(i)"
+                class="rounded-full border-white hover:opacity-45 border w-[20px] h-[20px] flex items-center justify-center">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col bg-white p-4 rounded-lg">
+      <label class="text-base font-bold">GUILD INFORMATION</label>
+      <div class="flex flex-col gap-3">
+        <div class="mt-2">
+          <button [disabled]="disabledAll" (click)="addGuildInfoInfo()"
+            class="outline text-sky-300 px-2 rounded-full hover:bg-slate-100">Add
+            Guild</button>
+        </div>
+        <div class="flex gap-2">
+          <ng-container *ngFor="let xb of guildInfo; index as i">
+            <div class="rounded-full px-4 py-2 bg-emerald-300 text-black flex flex-row gap-2">
+              {{xb}}
+              <button [disabled]="disabledAll" (click)="removeGuildInfo(i)"
+                class="rounded-full border-white hover:opacity-45 border w-[20px] h-[20px] flex items-center justify-center">
+                <i class="fa fa-times"></i>
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-col bg-white p-4 rounded-lg">
+      <div>
+        <button (click)="onSubmitClick()" class="outline text-sky-300 px-2 rounded-lg hover:bg-slate-100 py-2 mr-2"
+          [ngClass]="{'hidden': disabledAll}"> Submit</button>
+        <button (click)="onBackToHome()"
+          class=" text-white px-2 rounded-lg bg-red-500 hover:bg-red-700 py-2 ">Back</button>
+      </div>
+    </div>
+  </div>
+</form>

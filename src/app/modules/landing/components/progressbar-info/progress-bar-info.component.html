@@ -1,0 +1,28 @@
+<div class="flex flex-col gap-3 mt-2">
+    <div>
+        <button (click)="addSkill()" class="outline text-sky-300 px-2 rounded-full hover:bg-slate-100" [disabled]="readonly">Add
+            Skill</button>
+    </div>
+
+
+    <div class="grid grid-cols-4">
+        <ng-container *ngFor="let xb of skillInfo; index as i">
+            <div>
+                {{xb.name}}
+            </div>
+            <div>
+                {{xb.level}}
+            </div>
+            <div>
+                <div class="rounded-lg mb-6 h-5 w-full bg-neutral-200 dark:bg-neutral-600">
+                    <div class="rounded-lg h-5 bg-sky-300" [style.width]="(xb.level * 10)+ '%'"></div>
+                </div>
+            </div>
+            <button (click)="removeIndex(i)" [disabled]="readonly"
+                class="rounded-full border-white hover:opacity-45 border w-[20px] h-[20px] flex items-center justify-center">
+                <i class="fa fa-times"></i>
+            </button>
+        </ng-container>
+    </div>
+
+</div>
